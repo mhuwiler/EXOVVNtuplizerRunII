@@ -5,11 +5,6 @@
 #include "../interface/GenEventNtuplizer.h"
 #include "../interface/GenParticlesNtuplizer.h"
 #include "../interface/VerticesNtuplizer.h"
-#include "../interface/JpsiMuNtuplizer.h"
-#include "../interface/JpsiTauNtuplizer.h"
-#include "../interface/BsTauTauNtuplizer.h"
-#include "../interface/BsTauTauFHNtuplizer.h"
-#include "../interface/BsTauTauFHNtuplizer_mr.h"
 #include "../interface/BsDstarTauNuNtuplizer.h"
 
 #include "DataFormats/PatCandidates/interface/TriggerObjectStandAlone.h"
@@ -194,86 +189,6 @@ Ntuplizer::Ntuplizer(const edm::ParameterSet& iConfig):
   }
 
 
-  if (runFlags["doJpsiMu"]) {
-    std::cout<<"\n\n --->GETTING INSIDE doJpsiMu<---\n\n"<<std::endl;
-    nTuplizers_["JpsiMu"] = new JpsiMuNtuplizer( muonToken_   , 
-						 vtxToken_   , 
-						 beamToken_ ,
-						 packedpfcandidatesToken_,
-						 losttrackToken_,
-						 triggerToken_,
-						 triggerObjects_,
-						 genparticleToken_,
-						 runFlags,
-						 nBranches_ );
-  }
-  if (runFlags["doJpsiTau"]) {
-    std::cout<<"\n\n --->GETTING INSIDE doJpsiTau<---\n\n"<<std::endl;
-    nTuplizers_["JpsiTau"] = new JpsiTauNtuplizer( muonToken_   , 
-						   vtxToken_   , 
-						   beamToken_ ,
-						   packedpfcandidatesToken_,
-						   losttrackToken_,
-						   triggerToken_,
-						   triggerObjects_,
-						   genparticleToken_,
-						   gentauToken_,
-						   runFlags,
-						   runValues,
-						   runStrings,
-						   nBranches_ );
-  }
-
-  if (runFlags["doBsTauTau"]) {
-    std::cout<<"\n\n --->GETTING INSIDE doBsTauTau<---\n\n"<<std::endl;
-    nTuplizers_["BsTauTau"] = new BsTauTauNtuplizer( muonToken_   , 
-						     vtxToken_   , 
-						     beamToken_ ,
-						     packedpfcandidatesToken_,
-						     losttrackToken_,
-						     triggerToken_,
-						     triggerObjects_,
-						     genparticleToken_,
-						     gentauToken_,
-						     runFlags,
-						     runValues,
-						     runStrings,
-						     nBranches_ );
-  }
-
-  if (runFlags["doBsTauTauFH"]) {
-    std::cout<<"\n\n --->GETTING INSIDE doBsTauTauFH<---\n\n"<<std::endl;
-    nTuplizers_["BsTauTauFH"] = new BsTauTauFHNtuplizer( muonToken_   , 
-							 vtxToken_   , 
-							 beamToken_ ,
-							 packedpfcandidatesToken_,
-							 losttrackToken_,
-							 triggerToken_,
-							 triggerObjects_,
-							 genparticleToken_,
-							 gentauToken_,
-							 runFlags,
-							 runValues,
-							 runStrings,
-							 nBranches_ );
-  }
-
-  if (runFlags["doBsTauTauFH_mr"]) {
-    std::cout<<"\n\n --->GETTING INSIDE doBsTauTauFH_mr<---\n\n"<<std::endl;
-    nTuplizers_["BsTauTauFH_mr"] = new BsTauTauFHNtuplizer_mr( muonToken_   , 
-							 vtxToken_   , 
-							 beamToken_ ,
-							 packedpfcandidatesToken_,
-							 losttrackToken_,
-							 triggerToken_,
-							 triggerObjects_,
-							 genparticleToken_,
-							 gentauToken_,
-							 runFlags,
-							 runValues,
-							 runStrings,
-							 nBranches_ );
-  }
 
   if (runFlags["doBsDstarTauNu"]) {
     std::cout<<"\n\n --->GETTING INSIDE doBsDstarTauNu<---\n\n"<<std::endl;
