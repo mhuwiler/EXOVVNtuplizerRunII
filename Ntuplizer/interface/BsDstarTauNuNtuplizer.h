@@ -122,121 +122,121 @@
 class BsDstarTauNuNtuplizer : public CandidateNtuplizer {
 
 
- public:
-  BsDstarTauNuNtuplizer( edm::EDGetTokenT<pat::MuonCollection>    muonToken   , 
-		   edm::EDGetTokenT<reco::VertexCollection> verticeToken, 
-		   edm::EDGetTokenT<reco::BeamSpot> bsToken, 
-		   edm::EDGetTokenT<pat::PackedCandidateCollection> packedpfcandidatesToken,
-		   edm::EDGetTokenT<pat::PackedCandidateCollection> losttrackToken,
-		   edm::EDGetTokenT<edm::TriggerResults> triggertoken,
-		   edm::EDGetTokenT<pat::TriggerObjectStandAloneCollection> triggerobject,
-		   edm::EDGetTokenT<reco::GenParticleCollection> genptoken, 
-		    edm::EDGetTokenT<std::vector<reco::GenJet>> genttoken,
-		   std::map< std::string, bool >& runFlags,
-		   std::map< std::string, double >& runValues,
-		    std::map< std::string, std::string >& runStrings,
-		   NtupleBranches* nBranches );
+public:
+    BsDstarTauNuNtuplizer(edm::EDGetTokenT<pat::MuonCollection> muonToken, 
+		edm::EDGetTokenT<reco::VertexCollection> verticeToken, 
+		edm::EDGetTokenT<reco::BeamSpot> bsToken, 
+		edm::EDGetTokenT<pat::PackedCandidateCollection> packedpfcandidatesToken, 
+		edm::EDGetTokenT<pat::PackedCandidateCollection> losttrackToken, 
+		edm::EDGetTokenT<edm::TriggerResults> triggertoken, 
+		edm::EDGetTokenT<pat::TriggerObjectStandAloneCollection> triggerobject, 
+		edm::EDGetTokenT<reco::GenParticleCollection> genptoken, 
+		edm::EDGetTokenT<std::vector<reco::GenJet>> genttoken, 
+		std::map< std::string, bool >& runFlags, 
+		std::map< std::string, double >& runValues, 
+		std::map< std::string, std::string >& runStrings, 
+		NtupleBranches* nBranches);
 
-  ~BsDstarTauNuNtuplizer( void );
+    ~BsDstarTauNuNtuplizer( void ); 
 
-  std::tuple<Float_t, TransientVertex> vertexProb( const std::vector<reco::TransientTrack>& tracks);
+    std::tuple<Float_t, TransientVertex> vertexProb(const std::vector<reco::TransientTrack>& tracks); 
 
-  particle_cand calculateIPvariables(AnalyticalImpactPointExtrapolator extrapolator,
-				     RefCountedKinematicParticle particle,
-				     RefCountedKinematicVertex vertex,
-				     reco::Vertex wrtVertex);
+    particle_cand calculateIPvariables(AnalyticalImpactPointExtrapolator extrapolator, 
+		RefCountedKinematicParticle particle, 
+		RefCountedKinematicVertex vertex, 
+		reco::Vertex wrtVertex); 
   
-  std::pair<bool, Measurement1D> absoluteImpactParameter(const TrajectoryStateOnSurface& tsos,
-							 RefCountedKinematicVertex vertex,
-							 VertexDistance& distanceComputer);
+    std::pair<bool, Measurement1D> absoluteImpactParameter(const TrajectoryStateOnSurface& tsos, 
+		RefCountedKinematicVertex vertex, 
+		VertexDistance& distanceComputer); 
 
 
-  math::PtEtaPhiMLorentzVector daughter_p4(std::vector< RefCountedKinematicParticle > fitted_children, size_t i);
+    math::PtEtaPhiMLorentzVector daughter_p4(std::vector< RefCountedKinematicParticle > fitted_children, size_t i); 
 
-  float MuonPFIso(pat::Muon muon);
-  bool fillBranches( edm::Event const & event, const edm::EventSetup& iSetup );
-  Float_t getMaxDoca(std::vector<RefCountedKinematicParticle> &kinParticles);
-  Float_t getMinDoca(std::vector<RefCountedKinematicParticle> &kinParticles);
-  TVector3 getVertex(const reco::GenParticle& part);
+    float MuonPFIso(pat::Muon muon); 
+    bool fillBranches( edm::Event const & event, const edm::EventSetup& iSetup ); 
+    Float_t getMaxDoca(std::vector<RefCountedKinematicParticle> &kinParticles); 
+    Float_t getMinDoca(std::vector<RefCountedKinematicParticle> &kinParticles); 
+    TVector3 getVertex(const reco::GenParticle& part); 
 
-  void printout(const RefCountedKinematicVertex& myVertex);
-  void printout(const RefCountedKinematicParticle& myParticle);
-  void printout(const RefCountedKinematicTree& myTree);
+    void printout(const RefCountedKinematicVertex& myVertex); 
+    void printout(const RefCountedKinematicParticle& myParticle); 
+    void printout(const RefCountedKinematicTree& myTree); 
 
-  Int_t decaymode_id(std::string str);
+    Int_t decaymode_id(std::string str); 
   
 private:
-   edm::EDGetTokenT<pat::MuonCollection>    muonToken_   ;
-   edm::EDGetTokenT<reco::VertexCollection> verticeToken_   ;
-   edm::EDGetTokenT<reco::BeamSpot> bsToken_   ;
-   edm::EDGetTokenT<pat::PackedCandidateCollection>   		packedpfcandidatesToken_;
-   edm::EDGetTokenT<pat::PackedCandidateCollection>   		losttrackToken_;
-   edm::EDGetTokenT<edm::TriggerResults> 		     HLTtriggersToken_;
-   edm::EDGetTokenT<pat::TriggerObjectStandAloneCollection>  triggerObjects_;
-   edm::EDGetTokenT<reco::GenParticleCollection> genParticlesToken_;
-   edm::EDGetTokenT<std::vector<reco::GenJet>> genTauToken_;
+    edm::EDGetTokenT<pat::MuonCollection> muonToken_; 
+    edm::EDGetTokenT<reco::VertexCollection> verticeToken_; 
+    edm::EDGetTokenT<reco::BeamSpot> bsToken_; 
+    edm::EDGetTokenT<pat::PackedCandidateCollection> packedpfcandidatesToken_; 
+    edm::EDGetTokenT<pat::PackedCandidateCollection> losttrackToken_; 
+    edm::EDGetTokenT<edm::TriggerResults> HLTtriggersToken_; 
+    edm::EDGetTokenT<pat::TriggerObjectStandAloneCollection> triggerObjects_; 
+    edm::EDGetTokenT<reco::GenParticleCollection> genParticlesToken_; 
+    edm::EDGetTokenT<std::vector<reco::GenJet>> genTauToken_; 
 
-   edm::Handle<pat::MuonCollection>      		       muons_		       ;
-   edm::Handle< reco::VertexCollection >  vertices_;
-   edm::Handle< reco::BeamSpot >  beamspot_;
-   edm::Handle< std::vector<pat::PackedCandidate> > packedpfcandidates_   ;
-   edm::Handle< std::vector<pat::PackedCandidate> > losttrack_   ;
-   edm::Handle< edm::TriggerResults> 			     HLTtriggers_;
-   edm::Handle<pat::TriggerObjectStandAloneCollection>	     triggerObjects;
-   edm::Handle< reco::GenParticleCollection >  genParticles_;
-   edm::Handle< std::vector<reco::GenJet> >  genTaus_;
+    edm::Handle<pat::MuonCollection> muons_; 
+    edm::Handle< reco::VertexCollection> vertices_; 
+    edm::Handle< reco::BeamSpot> beamspot_; 
+    edm::Handle< std::vector<pat::PackedCandidate>> packedpfcandidates_; 
+    edm::Handle< std::vector<pat::PackedCandidate>> losttrack_; 
+    edm::Handle< edm::TriggerResults> HLTtriggers_; 
+    edm::Handle<pat::TriggerObjectStandAloneCollection> triggerObjects; 
+    edm::Handle< reco::GenParticleCollection> genParticles_; 
+    edm::Handle< std::vector<reco::GenJet>> genTaus_; 
 
-   edm::ESHandle<TransientTrackBuilder> builder;
+    edm::ESHandle<TransientTrackBuilder> builder; 
 
-   const MagneticField                 *fMagneticField;
+    const MagneticField *fMagneticField; 
 
-   ParticleMass muon_mass = 0.1056583;
-   ParticleMass jpsi_mass = 3.09687;
-   ParticleMass pion_mass = 0.139571;
-   ParticleMass kaon_mass = 0.493677;
-   ParticleMass phi_mass = 1.019461;
-   ParticleMass ds_mass = 2.01026;
-   ParticleMass d0_mass = 1.86483;
+    ParticleMass muon_mass = 0.1056583; 
+    ParticleMass jpsi_mass = 3.09687; 
+    ParticleMass pion_mass = 0.139571; 
+    ParticleMass kaon_mass = 0.493677; 
+    ParticleMass phi_mass = 1.019461; 
+    ParticleMass ds_mass = 2.01026; 
+    ParticleMass d0_mass = 1.86483; 
    
-   float muon_sigma = 0.0000001;
-   float jp_m_sigma = 0.00004;
-   float pion_sigma = 0.000016;
-   float kaon_sigma = 0.000016;
-   float phi_sigma = 0.000016;
-   float ds_sigma = 0.00005;
-   float d0_sigma = 0.00005;
+    float muon_sigma = 0.0000001; 
+    float jp_m_sigma = 0.00004; 
+    float pion_sigma = 0.000016; 
+    float kaon_sigma = 0.000016; 
+    float phi_sigma = 0.000016; 
+    float ds_sigma = 0.00005; 
+    float d0_sigma = 0.00005; 
 
-   float chi = 0.;
-   float ndf = 0.;
+    float chi = 0.; 
+    float ndf = 0.; 
 
-   Float_t mass_kaon = 0.493677;
-   Float_t mass_pion = 0.139571;
-   Float_t mass_D0 = 1.86483;
-   Float_t mass_Dstar = 2.01026;
-   Float_t mass_B0 = 5.27963;
+    Float_t mass_kaon = 0.493677; 
+    Float_t mass_pion = 0.139571; 
+    Float_t mass_D0 = 1.86483; 
+    Float_t mass_Dstar = 2.01026; 
+    Float_t mass_B0 = 5.27963; 
 
 
-   bool runOnMC_;   
-   bool useDNN_;
+    bool runOnMC_; 
+    bool useDNN_; 
 
-   float c_dz;
-   float c_fsig;
-   float c_vprob;
-   float c_dnn;
+    float c_dz; 
+    float c_fsig; 
+    float c_vprob; 
+    float c_dnn; 
    
-   tensorflow::MetaGraphDef* graphDef;
-   tensorflow::Session* session;
-   tensorflow::Tensor data; // (tensorflow::DT_FLOAT, { 1, 50, 8 }); // single batch of dimension 10
-   tensorflow::Tensor label; // (tensorflow::DT_FLOAT, { 1,50}); 
-   tensorflow::Tensor add_global; //(tensorflow::DT_FLOAT, { 1, 2 }); 
-   tensorflow::Tensor isTraining; //(tensorflow::DT_FLOAT, { 1, 2 }); 
-   tensorflow::Tensor norm; //(tensorflow::DT_FLOAT, { 1, 2 }); 
+    tensorflow::MetaGraphDef* graphDef; 
+    tensorflow::Session* session; 
+    tensorflow::Tensor data; // (tensorflow::DT_FLOAT, { 1, 50, 8 }); // single batch of dimension 10
+    tensorflow::Tensor label; // (tensorflow::DT_FLOAT, { 1,50}); 
+    tensorflow::Tensor add_global; //(tensorflow::DT_FLOAT, { 1, 2 }); 
+    tensorflow::Tensor isTraining; //(tensorflow::DT_FLOAT, { 1, 2 }); 
+    tensorflow::Tensor norm; //(tensorflow::DT_FLOAT, { 1, 2 }); 
 
    
-   std::string dnnfile_;
+    std::string dnnfile_; 
 
-   std::map<std::tuple<Int_t, Float_t, Float_t, Float_t>, std::vector<Int_t>> DNNidx;
-   std::map<std::tuple<Int_t, Float_t, Float_t, Float_t>, std::vector<Float_t>> DNNval;
+    std::map<std::tuple<Int_t, Float_t, Float_t, Float_t>, std::vector<Int_t>> DNNidx; 
+    std::map<std::tuple<Int_t, Float_t, Float_t, Float_t>, std::vector<Float_t>> DNNval; 
 
 };
 
