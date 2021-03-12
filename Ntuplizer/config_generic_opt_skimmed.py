@@ -50,7 +50,7 @@ options.register( 'runUpToEarlyF',
 
 
 
-options.maxEvents = 100000
+options.maxEvents = 1000
 #options.maxEvents = -1
 
 #data file
@@ -70,10 +70,10 @@ options.maxEvents = 100000
 
 options.inputFiles = [
  "/store/data/Run2018D/ParkingBPH1/MINIAOD/05May2019promptD-v1/270000/4682963C-2EFF-FF4D-B234-8ED5973F70E4.root",
-#"root://cms-xrd-global.cern.ch//store/data/Run2018D/ParkingBPH1/MINIAOD/05May2019promptD-v1/270000/0639BC54-D852-F24C-BA2C-41A95B5C3EC5.root",
-#"root://cms-xrd-global.cern.ch//store/data/Run2018D/ParkingBPH1/MINIAOD/05May2019promptD-v1/270000/6A143A1A-D7A6-0B4D-9A7C-C7A0F36384FB.root",
-#"root://cms-xrd-global.cern.ch//store/data/Run2018D/ParkingBPH1/MINIAOD/05May2019promptD-v1/270000/8D4EC1FC-2E3D-934D-85FC-DC4B94925765.root",
-#"root://cms-xrd-global.cern.ch//store/data/Run2018D/ParkingBPH1/MINIAOD/05May2019promptD-v1/270000/676DCCFA-4D23-364B-9AA5-1753F3BA1957.root",
+"/store/data/Run2018D/ParkingBPH1/MINIAOD/05May2019promptD-v1/270000/0639BC54-D852-F24C-BA2C-41A95B5C3EC5.root",
+"/store/data/Run2018D/ParkingBPH1/MINIAOD/05May2019promptD-v1/270000/6A143A1A-D7A6-0B4D-9A7C-C7A0F36384FB.root",
+"/store/data/Run2018D/ParkingBPH1/MINIAOD/05May2019promptD-v1/270000/8D4EC1FC-2E3D-934D-85FC-DC4B94925765.root",
+"/store/data/Run2018D/ParkingBPH1/MINIAOD/05May2019promptD-v1/270000/676DCCFA-4D23-364B-9AA5-1753F3BA1957.root",
 ] #'/store/data/Run2018B/Charmonium/MINIAOD/17Sep2018-v1/10000/02CFE87F-7C17-1340-8300-FDA86C16D58C.root'
 #options.inputFiles = '/store/mc/RunIISummer16MiniAODv3/BcToJPsiMuNu_TuneCUEP8M1_13TeV-bcvegpy2-pythia8-evtgen/MINIAODSIM/PUMoriond17_94X_mcRun2_asymptotic_v3-v1/240000/E8EC0256-2F7F-EA11-8146-0CC47A6C06C6.root'
 #options.inputFiles = '/store/mc/RunIIAutumn18MiniAOD/OniaAndX_ToMuMu_MuFilter_SoftQCDnonD_TuneCP5_13TeV-pythia8-evtgen/MINIAODSIM/102X_upgrade2018_realistic_v15-v1/260000/1B2AF16F-83A2-5442-83EB-CB34B26D35CF.root'
