@@ -323,7 +323,8 @@ particle_cand BsDstarTauNuNtuplizer::calculateIPvariables(AnalyticalImpactPointE
 }
 
 
-math::PtEtaPhiMLorentzVector BsDstarTauNuNtuplizer::daughter_p4(std::vector< RefCountedKinematicParticle > fitted_children, size_t i){
+math::PtEtaPhiMLorentzVector BsDstarTauNuNtuplizer::daughter_p4(std::vector< RefCountedKinematicParticle > fitted_children, size_t i)
+{
     const auto& state = fitted_children.at(i)->currentState();
 
     return math::PtEtaPhiMLorentzVector(
@@ -333,10 +334,48 @@ math::PtEtaPhiMLorentzVector BsDstarTauNuNtuplizer::daughter_p4(std::vector< Ref
         state.mass());
 }
 
+bool BsDstarTauNuNtuplizer::checkTriggers(edm::Handle<edm::TriggerResults>& HLTtriggers, const edm::TriggerNames& trigNames, std::vector<std::string>& finalTriggerName) 
+{
+    bool isTriggered = false;
 
-bool BsDstarTauNuNtuplizer::fillBranches( edm::Event const & event, const edm::EventSetup& iSetup ){
+    //    std::string finalTriggerFilterObjName="";
+
+    for (unsigned int i = 0, n = HLTtriggers->size(); i < n; ++i) 
+    {
+        //if(trigNames.triggerName(i).find("HLT_DoubleMu4_JpsiTrk_Displaced_v")!= std::string::npos || trigNames.triggerName(i).find("HLT_Dimuon0_Jpsi3p5_Muon2_v")!= std::string::npos ){
+   
+    //     nBranches_->HLT_BPH_isFired[trigNames.triggerName(i)] = HLTtriggers->accept(i); // TODO: restore 
+        if(trigNames.triggerName(i).find("HLT_Mu8_IP3")!= std::string::npos || 
+            trigNames.triggerName(i).find("HLT_Mu8_IP5")!= std::string::npos || 
+            trigNames.triggerName(i).find("HLT_Mu8_IP6")!= std::string::npos || 
+            trigNames.triggerName(i).find("HLT_Mu8p5_IP3p5")!= std::string::npos || 
+            trigNames.triggerName(i).find("HLT_Mu9_IP4")!= std::string::npos || 
+            trigNames.triggerName(i).find("HLT_Mu9_IP5")!= std::string::npos || 
+            trigNames.triggerName(i).find("HLT_Mu9_IP6")!= std::string::npos || 
+            trigNames.triggerName(i).find("HLT_Mu10p5_IP3p5")!= std::string::npos || 
+            trigNames.triggerName(i).find("HLT_Mu12_IP6")!= std::string::npos || 
+            trigNames.triggerName(i).find("HLT_Mu7_IP4")!= std::string::npos)
+        {
+            nBranches_->HLT_BPH_isFired[trigNames.triggerName(i)] = HLTtriggers->accept(i);
+
+            if(HLTtriggers->accept(i))
+            {
+                isTriggered = true;
+            //  std::cout << "This trigger is fired:" << trigNames.triggerName(i) << std::endl;
+                finalTriggerName.push_back(trigNames.triggerName(i));
+            //  finalTriggerFilterObjName="hltJpsiTkVertexFilter";
+            //  std::cout << "finalTriggerName = "  << finalTriggerName << std::endl;
+            }
+        }
+
+    }
+
+    return isTriggered; 
+}
 
 
+bool BsDstarTauNuNtuplizer::fillBranches(edm::Event const & event, const edm::EventSetup& iSetup)
+{
     // std::cout << "---------------- event, run, lumi = " << event.id().event() << " " << event.id().run() << " " << event.id().luminosityBlock() << "----------------" << std::endl;
 
     /********************************************************************
@@ -347,41 +386,10 @@ bool BsDstarTauNuNtuplizer::fillBranches( edm::Event const & event, const edm::E
     ********************************************************************/
 
     event.getByToken(HLTtriggersToken_, HLTtriggers_);
-    nBranches_->cutflow_perevt->Fill(0);
-
-    bool isTriggered = false;
     const edm::TriggerNames& trigNames = event.triggerNames(*HLTtriggers_);
-    std::vector<std::string> finalTriggerName;
-    //    std::string finalTriggerFilterObjName="";
 
-    for (unsigned int i = 0, n = HLTtriggers_->size(); i < n; ++i)
-    {
-        //if(trigNames.triggerName(i).find("HLT_DoubleMu4_JpsiTrk_Displaced_v")!= std::string::npos || trigNames.triggerName(i).find("HLT_Dimuon0_Jpsi3p5_Muon2_v")!= std::string::npos ){
-
-    //     nBranches_->HLT_BPH_isFired[trigNames.triggerName(i)] = HLTtriggers_->accept(i); // TODO: restore
-        if(trigNames.triggerName(i).find("HLT_Mu8_IP3")!= std::string::npos ||
-            trigNames.triggerName(i).find("HLT_Mu8_IP5")!= std::string::npos ||
-            trigNames.triggerName(i).find("HLT_Mu8_IP6")!= std::string::npos ||
-            trigNames.triggerName(i).find("HLT_Mu8p5_IP3p5")!= std::string::npos ||
-            trigNames.triggerName(i).find("HLT_Mu9_IP4")!= std::string::npos ||
-            trigNames.triggerName(i).find("HLT_Mu9_IP5")!= std::string::npos ||
-            trigNames.triggerName(i).find("HLT_Mu9_IP6")!= std::string::npos ||
-            trigNames.triggerName(i).find("HLT_Mu10p5_IP3p5")!= std::string::npos ||
-            trigNames.triggerName(i).find("HLT_Mu12_IP6")!= std::string::npos ||
-            trigNames.triggerName(i).find("HLT_Mu7_IP4")!= std::string::npos)
-        {
-            nBranches_->HLT_BPH_isFired[trigNames.triggerName(i)] = HLTtriggers_->accept(i);
-            if(HLTtriggers_->accept(i))
-            {
-                isTriggered = true;
-	        //	std::cout << "This trigger is fired:" << trigNames.triggerName(i) << std::endl;
-                finalTriggerName.push_back(trigNames.triggerName(i));
-	        //  finalTriggerFilterObjName="hltJpsiTkVertexFilter";
-	        //  std::cout << "finalTriggerName = "  << finalTriggerName << std::endl;
-            }
-        }
-
-    }
+    std::vector<std::string> finalTriggerName; 
+    bool isTriggered = checkTriggers(HLTtriggers_, trigNames, finalTriggerName); 
 
 
     /********************************************************************

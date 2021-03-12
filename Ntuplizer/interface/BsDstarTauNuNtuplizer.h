@@ -164,6 +164,8 @@ public:
     void printout(const RefCountedKinematicTree& myTree); 
 
     Int_t decaymode_id(std::string str); 
+
+    bool checkTriggers(edm::Handle<edm::TriggerResults>& HLTtriggers, const edm::TriggerNames& trigNames, std::vector<std::string>& finalTriggerName); 
   
 private:
     edm::EDGetTokenT<pat::MuonCollection> muonToken_; 
@@ -177,14 +179,14 @@ private:
     edm::EDGetTokenT<std::vector<reco::GenJet>> genTauToken_; 
 
     edm::Handle<pat::MuonCollection> muons_; 
-    edm::Handle< reco::VertexCollection> vertices_; 
-    edm::Handle< reco::BeamSpot> beamspot_; 
-    edm::Handle< std::vector<pat::PackedCandidate>> packedpfcandidates_; 
-    edm::Handle< std::vector<pat::PackedCandidate>> losttrack_; 
-    edm::Handle< edm::TriggerResults> HLTtriggers_; 
+    edm::Handle<reco::VertexCollection> vertices_; 
+    edm::Handle<reco::BeamSpot> beamspot_; 
+    edm::Handle<std::vector<pat::PackedCandidate>> packedpfcandidates_; 
+    edm::Handle<std::vector<pat::PackedCandidate>> losttrack_; 
+    edm::Handle<edm::TriggerResults> HLTtriggers_; 
     edm::Handle<pat::TriggerObjectStandAloneCollection> triggerObjects; 
-    edm::Handle< reco::GenParticleCollection> genParticles_; 
-    edm::Handle< std::vector<reco::GenJet>> genTaus_; 
+    edm::Handle<reco::GenParticleCollection> genParticles_; 
+    edm::Handle<std::vector<reco::GenJet>> genTaus_; 
 
     edm::ESHandle<TransientTrackBuilder> builder; 
 
